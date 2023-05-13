@@ -10,7 +10,8 @@ var obstaclesGroup, obstacle1, obstacle2, obstacle3, obstacle4, obstacle5, obsta
 
 var score;
 
-
+var gameOverImg,restartIng
+var jumpSound,checkPointSound,dieSound
 function preload(){
   trex_running = loadAnimation("trex1.png","trex3.png","trex4.png");
   trex_collided = loadAnimation("trex_collided.png");
@@ -25,6 +26,13 @@ function preload(){
   obstacle4 = loadImage("obstacle4.png");
   obstacle5 = loadImage("obstacle5.png");
   obstacle6 = loadImage("obstacle6.png");
+  restartIng = loadImage("restart.png") 
+  
+  gameOverImg = loadImage("gameOver.png")
+ 
+  jumpSound  = loadSound("jump.mp3")
+  checkPointSound = loadSound("checkPoint.mp3")
+  dieSound = loadSound("die.mp3")
   
 }
 
@@ -41,6 +49,13 @@ function setup() {
   ground.x = ground.width /2;
   
   
+  gameOver = creatSprite(300,100);
+  gameOver.addImage(gameOverImg);
+   gameOve.scale = 0,5
+  restart.scale = 0,5
+   
+  restart = creatSprite(300,140);
+  restart.addImage(restartImg);
   invisibleGround = createSprite(200,190,400,10);
   invisibleGround.visible = false;
   
@@ -93,7 +108,16 @@ function draw() {
     }
   }
    else if (gameState === END) {
+     gameOver.visible = true;
+     restart.visible = true;
+     
+     
       ground.velocityX = 0;
+     trex.changeAnimation("collided",trex_collied);
+     
+     obstaclesGroup.setLifeTimeEach(-1);
+     cloudsGroup.setLifeTimeEach(-1);
+     
      
      obstaclesGroup.setVelocityXEach(0);
      cloudsGroup.setVelocityXEach(0);
