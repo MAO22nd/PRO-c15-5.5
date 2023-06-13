@@ -2,7 +2,7 @@ var PLAY = 1;
 var END = 0;
 var gameState = PLAY;
 
-var trex, trex_running, trex_collided;
+var cachorro;
 var ground, invisibleGround, groundImage;
 
 var cloudsGroup, cloudImage;
@@ -13,8 +13,8 @@ var score;
 var gameOverImg,restartIng
 var jumpSound,checkPointSound,dieSound
 function preload(){
-  trex_running = loadAnimation("trex1.png","trex3.png","trex4.png");
-  trex_collided = loadAnimation("trex_collided.png");
+  cachorro = loadAnimation("pngwing.com-removebg-preview(1).png");
+    
   
   groundImage = loadImage("ground2.png");
   
@@ -103,7 +103,7 @@ function draw() {
     //gerar obstáculos no chão
     spawnObstacles();
     
-    if(obstaclesGroup.isTouching(trex)){
+    if(obstaclesGroup.isTouching(cachorro)){
         gameState = END;
     }
   }
@@ -113,7 +113,7 @@ function draw() {
      
      
       ground.velocityX = 0;
-     trex.changeAnimation("collided",trex_collied);
+  
      
      obstaclesGroup.setLifeTimeEach(-1);
      cloudsGroup.setLifeTimeEach(-1);
